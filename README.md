@@ -29,8 +29,8 @@ O campo ```error``` vem preenchido com uma mensagem de erro (caso não haja erro
 ## Como usar?
 O _webservice_ possui apenas dois _endpoints_, descritos abaixos.
 
-### ```GET /[api]```
-Retorna uma lista como todos os usuários registrados.
+### GET /[api]
+Retorna uma lista com todos os usuários registrados.
 
-### ```GET /[api/]<id>```
+### GET /[api/]<id>
 Retorna o usuário com o ID dado. Caso o mesmo não seja encontrado, um erro 404 é devolvido ao _client_.
