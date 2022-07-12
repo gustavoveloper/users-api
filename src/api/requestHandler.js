@@ -1,4 +1,4 @@
-const { matchRegexp } = require('../helpers');
+const { matchRegexp, getErrorResponseBody } = require('../helpers');
 
 
 async function requestHandler(request, response) {
@@ -7,7 +7,10 @@ async function requestHandler(request, response) {
 
     if (method === 'GET') {}
 
-    else {}
+    else {
+        const body = getErrorResponseBody(`Método HTTP não suportado: ${method}`);
+        return response.status(405).json(body)
+    }
 };
 
 
