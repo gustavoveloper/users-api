@@ -1,4 +1,8 @@
-const { matchRegexp, getErrorResponseBody } = require('../helpers');
+const {
+    matchRegexp,
+    getErrorResponseBody,
+    getSuccessResponseBody
+} = require('../helpers');
 
 const getAllUsers = require('../utils/getAllUsers');
 
@@ -10,7 +14,7 @@ async function requestHandler(request, response) {
     if (method === 'GET') {
         if (matchRegexp(/^\/(api\/?)?$/, url)) {
             const users = await getAllUsers();
-            return response.json(users)
+            return response.json(getSuccessResponseBody(users))
         }
 
         else {
