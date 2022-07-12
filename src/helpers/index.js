@@ -4,5 +4,10 @@ module.exports = {
     getErrorResponseBody: error => ({
         error,
         data: null
+    }),
+
+    getSuccessResponseBody: data => ({
+        error: null,
+        data
     })
 }

@@ -1,12 +1,17 @@
 const { matchRegexp, getErrorResponseBody } = require('../helpers');
 
+const getAllUsers = require('../utils/getAllUsers');
+
 
 async function requestHandler(request, response) {
     const { url, method } = request;
 
 
     if (method === 'GET') {
-        if (matchRegexp(/^\/(api\/?)?$/, url)) {}
+        if (matchRegexp(/^\/(api\/?)?$/, url)) {
+            const users = await getAllUsers();
+            return response.json(users)
+        }
 
         else {
             const body = getErrorResponseBody('Recurso não encontrado');
