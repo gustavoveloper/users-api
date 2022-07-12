@@ -1,7 +1,8 @@
 const {
     matchRegexp,
     getErrorResponseBody,
-    getSuccessResponseBody
+    getSuccessResponseBody,
+    getUserIdFromURL
 } = require('../helpers');
 
 const getAllUsers = require('../utils/getAllUsers');
@@ -19,17 +20,20 @@ async function requestHandler(request, response) {
         }
 
         else if (matchRegexp(/^\/(api\/)?[0-9]+\/?$/, url)) { // "/[api/]{id}" endpoint.
+            const user = await getUserById(getUserIdFromURL(url));
+
+            if (user === null) return response.status(404).json(getErrorResponseBody('Usuário não encontrado'));
+
+            return response.json(getSuccessResponseBody(user))
         }
 
         else {
-            const body = getErrorResponseBody('Recurso não encontrado');
-            return response.status(404).json(body)    
+            return response.status(404).json(getErrorResponseBody('Recurso não encontrado'))
         }
     }
 
     else {
-        const body = getErrorResponseBody(`Método HTTP não suportado: ${method}`);
-        return response.status(405).json(body)
+        return response.status(405).json(getErrorResponseBody(`Método HTTP não suportado: ${method}`))
     }
 };
 
